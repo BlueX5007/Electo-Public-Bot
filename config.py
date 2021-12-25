@@ -1,3 +1,3 @@
 owner_id = xxxxxxxxxxxxxxxxx
-token = xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-prefix = x
+token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
+prefix = 'x'
