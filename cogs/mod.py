@@ -1,8 +1,10 @@
+from discord import colour
 from discord.ext import commands
 import discord
 import random
 import asyncio
 import datetime
+import humanfriendly
 #Functions for the bot to work
 def convert(time):
   pos = ["s","m","h","d"]
@@ -108,7 +110,7 @@ class Mod(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(moderate_members=True)
-    async def mute(self, ctx,member:discord.Member,time,unit,*,reason):
+    async def mute(self, ctx,member:discord.Member,timee,*,reason):
         pos = ["s","m","h","d"]
         time_dict = {"s" : 1, "m" : 60, "h" : 3600, "d": 3600*24} 
         now = datetime.datetime.now()
@@ -116,36 +118,18 @@ class Mod(commands.Cog):
         toprole_author = roles_author[-1]
         roles_member = member.roles
         toprole_member = roles_member[-1]
-        if unit not in pos:
-            await ctx.send('Your unit is not in my list! Make sure to have it in this format : `;mute @Criminal 10 m Robbing a bank` to mute someone for 1 minute. The valid units are `s`, `m`, `h`, `d`.')
-        elif member.id == ctx.author.id:
+        if member.id == ctx.author.id:
             await ctx.send("Cannot mute yourself.")
         elif toprole_author < toprole_member:
             await ctx.send(f'{member} has a higher role than you!')
         elif toprole_author == toprole_member:
             await ctx.send(f'{member} has a equal role with you!')
         else:
-            timee = int(time)
-            if unit == 's':
-                time_change = datetime.timedelta(seconds=timee)
-                new_time = now + time_change
-                await member.timeout(new_time, reason=f'{reason} | Action made by {ctx.author}')
-                await ctx.send(f'Timed out {member} for {time}')
-            elif unit == 'm':
-                time_change = datetime.timedelta(minutes=timee)
-                new_time = now + time_change
-                await member.timeout(new_time, reason=f'{reason} | Action made by {ctx.author}')
-                await ctx.send(f'Timed out {member} for {time}')
-            elif unit == 'h':
-                time_change = datetime.timedelta(hours=timee)
-                new_time = now + time_change
-                await member.timeout(new_time, reason=f'{reason} | Action made by {ctx.author}')
-                await ctx.send(f'Timed out {member} for {time}')
-            elif unit == 'd':
-                time_change = datetime.timedelta(days=timee)
-                new_time = now + time_change
-                await member.timeout(new_time, reason=f'{reason} | Action made by {ctx.author}')
-                await ctx.send(f'Timed out {member} for {time}')
+            time = humanfriendly.parse_timespan(timee)
+            await member.timeout(until = discord.utils.utcnow() + datetime.timedelta(seconds=time), reason = f"{reason} | Action was taken by {ctx.author}")
+            embed = discord.Embed(title='Muted user!', description=f"Muted {member} for {timee}!", colour=discord.Colour.dark_teal())
+            embed.add_field(name='Credits', value='(This bot was forked from https://github.com/BlueX5007/Electo-Public-Bot)')
+            await ctx.send()
 
 def setup(bot):
     bot.add_cog(Mod(bot))
