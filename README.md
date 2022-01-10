@@ -14,7 +14,9 @@ Must have all intents enabled
 Bot must not be blacklisted or banned
 Must install these packages
 
-pip install humanfriendly \n
-pip install datetime \n
-pip install git+https://github.com/Pycord-Development/pycord \n
+pip install humanfriendly   
+     
+pip install datetime 
+     
+pip install git+https://github.com/Pycord-Development/pycord
 
