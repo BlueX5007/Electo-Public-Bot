@@ -12,4 +12,9 @@ May cause **Unknown Interaction 404** on buttons or slash commands, but that's d
 
 Must have all intents enabled
 Bot must not be blacklisted or banned
+Must install these packages
+
+pip install humanfriendly
+pip install datetime
+pip install git+https://github.com/Pycord-Development/pycord
 
