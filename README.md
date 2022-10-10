@@ -5,8 +5,8 @@ You are **not** allowed to say or announce that this is you coded/made it. Inste
 
 ***Info***
 
-Made using Py-Cord Alpha
-May cause **Unknown Interaction 404** on buttons or slash commands, but that's discord's issues, and will be fixed by discord.
+Made using Py-Cord
+May cause **Unknown Interaction 404** on buttons or slash commands, in that case, it means that your bot had extremely bad ping.
 
 ***Requirements***
 
@@ -16,9 +16,11 @@ Bot must not be blacklisted or banned
 
 Must install these packages
 
+
+
 pip install humanfriendly   
      
 pip install datetime 
      
-pip install git+https://github.com/Pycord-Development/pycord
+pip install py-cord
 
